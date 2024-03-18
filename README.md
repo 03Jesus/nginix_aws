@@ -140,3 +140,27 @@ output "url" {
 ```
 ## Paso 8. Crear script de ansible
 Vamos a crear un listado de comandos que se ejecutarán en la máquina instanciada para poder instalar ansible y posteriormente PHP junto con Ngnix
+```
+#!/usr/bin/env bash
+set -x
+exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
+export PATH="$PATH:/usr/bin"
+sleep 10
+sudo apt update
+sudo apt install -y git python3-pip ansible
+pip3 install ansible
+git clone https://github.com/03Jesus/nginix_aws.git
+cd nginix_aws/ansible
+ansible-playbook nginx.yaml
+```
+## Paso 9. Ejecutar terraform
+```
+terraform init
+terraform plan
+terraform apply --auto-approve
+```
+![Crear lave SSH](/images/terraform_init.png)
+![Crear lave SSH](/images/terraform_apply.png)
+![Crear lave SSH](/images/ansible_executing.png)
+## Paso 10. Verificar la instancia de la maquina virtual
+![Crear lave SSH](/images/g_g.png)

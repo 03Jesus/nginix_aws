@@ -1,6 +1,5 @@
 ssh_key_path="/home/jesu/.ssh/id_rsa.pub"
 project_name="ngnix_example"
-region_name="us-east-1"
-availability_zone="us-east-1"
+region_name="us-east-2"
 vpc_id="vpc-XXXXXX"
 instance_type="t2.micro"

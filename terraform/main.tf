@@ -1,7 +1,6 @@
 variable "ssh_key_path" {}
 variable "project_name" {}
 variable "region_name" {}
-variable "availability_zone" {}
 variable "vpc_id"{}
 variable "instance_type" {}
 
@@ -72,7 +71,6 @@ data "template_file" "userdata" {
 
 resource "aws_instance" "app_server" {
   ami               = "ami-0b8b44ec9a8f90422"
-  availability_zone = var.availability_zone
   instance_type     = var.instance_type
   vpc_security_group_ids = [
     aws_security_group.allow_ssh.id,
