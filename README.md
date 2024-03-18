@@ -1,4 +1,9 @@
 # Creación de un servidor Nginx con PHP
+Este repositorio contiene las instrucciones y archivos necesarios para poder instanciar un servidor web con PHP y Ngnix en AWS utilizando Terraform junto con Ansible.  
+_Para este ejercicio se ha utilizado una máquina Ubuntu con WSL._  
+Primero debemos instalar las herramientas mencionadas.  
+Se pueden seguir las instalaciones del siguiente [link](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) para instalar Terraform  
+En el caso de Ansible, lo instalaremos luego de instanciar la máquina utilizando un script de bash que se puede encontrar en el archivo [userdata.sh](/terraform/userdata.sh). En las líneas 7 y 8 se puede ver la instalación de Ansible.
 ## Paso 1. Instalar AWS CLI
 Se puede instalar el CLI para configurar nuestra cuenta de AWS desde el siguiente [link](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 ## Paso 2. Crear claves de acceso en AWS
@@ -8,10 +13,12 @@ En este caso crearemos un usuario de IAM para obtener las claves de acceso de es
 ![aws configure](/images/aws_configure.png)
 ## Paso 4. Crear claves SSH
 ![Crear lave SSH](/images/ssh_keys.png)
+### Paso 4.1 Inicializar el agente SSH y agregar las claves
+Estos comandos asegurarán que el agente SSH maneje las claves por nosotros  
 ![Crear lave SSH](/images/ssh_keys2.png)
 ## Paso 5. Crear el archivo terrafrom.tfvars
-En este archivo vamos a añadir las variables para nuestro proyecto
-terraform.tfvars
+En este archivo vamos a añadir las variables para nuestro proyecto  
+[terraform.tfvars](/terraform/terraform.tfvars)
 ```
 ssh_key_path="/home/jesu/.ssh/id_rsa.pub"
 project_name="ngnix_example"
@@ -21,7 +28,7 @@ vpc_id="vpc-XXXXX"
 instance_type="t2.micro"
 ```
 ## Paso 6. Crear el archivo versions.tf
-versions.tf
+[versions.tf](/terraform/versions.tf)
 ```
 terraform {
 	required_providers {
@@ -34,7 +41,7 @@ terraform {
 }
 ```
 ## Paso 7. Crear el archivo main.tf
-main.tf
+[main.tf](/terraform/main.tf)
 ```
 variable "ssh_key_path" {}
 variable "project_name" {}
@@ -139,7 +146,8 @@ output "url" {
 }
 ```
 ## Paso 8. Crear script de ansible
-Vamos a crear un listado de comandos que se ejecutarán en la máquina instanciada para poder instalar ansible y posteriormente PHP junto con Ngnix
+Vamos a crear un listado de comandos que se ejecutarán en la máquina instanciada para poder instalar ansible y posteriormente PHP junto con Ngnix  
+[userdata.sh](/terraform/userdata.sh)
 ```
 #!/usr/bin/env bash
 set -x
