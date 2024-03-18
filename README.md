@@ -172,3 +172,12 @@ terraform apply --auto-approve
 ![Crear lave SSH](/images/ansible_executing.png)
 ## Paso 10. Verificar la instancia de la maquina virtual
 ![Crear lave SSH](/images/g_g.png)
+
+# Agradecimientos y motivación
+Este reto fue motivado por el curso de Infraestructura para TI en la Universidad Tecnológica de Bolívar gracias al profesor Rafael Enrique Monterroza Barrios.  
+Trabajo realizado por:
+- Didier Jesus Agámez
+- Jesús David Puello Saavedra
+- Jesús David Petro Ramos  
+
+También agradecimiento al canal de YouTube [Cursos de Desarrollo](https://www.youtube.com/@CursosdeDesarrollo) por los cursos de Terraform y Ansible.
